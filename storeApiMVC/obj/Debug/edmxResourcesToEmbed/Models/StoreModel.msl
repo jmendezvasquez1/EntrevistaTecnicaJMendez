@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="storeModelStoreContainer" CdmEntityContainer="storeEntities">
+    <EntitySetMapping Name="costumers">
+      <EntityTypeMapping TypeName="storeModel.costumers">
+        <MappingFragment StoreEntitySet="costumers">
+          <ScalarProperty Name="idCostumer" ColumnName="idCostumer" />
+          <ScalarProperty Name="costumerName" ColumnName="costumerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderDetails">
+      <EntityTypeMapping TypeName="storeModel.orderDetails">
+        <MappingFragment StoreEntitySet="orderDetails">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="idDetail" ColumnName="idDetail" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="product" ColumnName="product" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="storeModel.orders">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="costumer" ColumnName="costumer" />
+          <ScalarProperty Name="dateRegister" ColumnName="dateRegister" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="storeModel.products">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

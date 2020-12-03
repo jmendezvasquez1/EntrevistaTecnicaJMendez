@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<table class="table" id="details">
+    <thead>
+        <tr>
+            <td>Product</td>
+            <td>ProductName</td>
+            <td>Quantity</td>
+        </tr>
+    </thead>
+    <tr>
+        <td></td>
+    </tr>
+</table>
+<script>
+    $(document).ready(function () {
+        tabla = $.getJSON("http://localhost:65406/api/order/GetOrderDetails", {id : @ViewBag.id}, function (res) {
+            console.log(res);
+            $.each(res, function (i, item) {
+                var row = `<tr>
+            <td>${item.Product}</td>
+        <td>${item.ProductName}</td>
+        <td>${item.Quantity}</td>
+        </tr>   `;
+                $("#details tbody").append(row);
+            });
+        });
+    });
+</script>

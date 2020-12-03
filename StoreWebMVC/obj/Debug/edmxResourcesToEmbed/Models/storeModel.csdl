@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="storeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="costumers">
+    <Key>
+      <PropertyRef Name="idCostumer" />
+    </Key>
+    <Property Name="idCostumer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="costumerName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="orders" Relationship="Self.FK__orders__costumer__286302EC" FromRole="costumers" ToRole="orders" />
+  </EntityType>
+  <EntityType Name="orderDetails">
+    <Key>
+      <PropertyRef Name="idDetail" />
+    </Key>
+    <Property Name="idDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idOrder" Type="Int32" />
+    <Property Name="product" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="orders" Relationship="Self.FK__orderDeta__idOrd__2B3F6F97" FromRole="orderDetails" ToRole="orders" />
+    <NavigationProperty Name="products" Relationship="Self.FK__orderDeta__produ__2C3393D0" FromRole="orderDetails" ToRole="products" />
+  </EntityType>
+  <EntityType Name="orders">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="costumer" Type="Int32" />
+    <Property Name="dateRegister" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="costumers" Relationship="Self.FK__orders__costumer__286302EC" FromRole="orders" ToRole="costumers" />
+    <NavigationProperty Name="orderDetails" Relationship="Self.FK__orderDeta__idOrd__2B3F6F97" FromRole="orders" ToRole="orderDetails" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="idProduct" />
+    </Key>
+    <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="7" Scale="2" />
+    <NavigationProperty Name="orderDetails" Relationship="Self.FK__orderDeta__produ__2C3393D0" FromRole="products" ToRole="orderDetails" />
+  </EntityType>
+  <Association Name="FK__orders__costumer__286302EC">
+    <End Role="costumers" Type="Self.costumers" Multiplicity="0..1" />
+    <End Role="orders" Type="Self.orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="costumers">
+        <PropertyRef Name="idCostumer" />
+      </Principal>
+      <Dependent Role="orders">
+        <PropertyRef Name="costumer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__idOrd__2B3F6F97">
+    <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+    <End Role="orderDetails" Type="Self.orderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="orders">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="orderDetails">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__orderDeta__produ__2C3393D0">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="orderDetails" Type="Self.orderDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="idProduct" />
+      </Principal>
+      <Dependent Role="orderDetails">
+        <PropertyRef Name="product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="storeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="costumers" EntityType="Self.costumers" />
+    <EntitySet Name="orderDetails" EntityType="Self.orderDetails" />
+    <EntitySet Name="orders" EntityType="Self.orders" />
+    <EntitySet Name="products" EntityType="Self.products" />
+    <AssociationSet Name="FK__orders__costumer__286302EC" Association="Self.FK__orders__costumer__286302EC">
+      <End Role="costumers" EntitySet="costumers" />
+      <End Role="orders" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__idOrd__2B3F6F97" Association="Self.FK__orderDeta__idOrd__2B3F6F97">
+      <End Role="orders" EntitySet="orders" />
+      <End Role="orderDetails" EntitySet="orderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__orderDeta__produ__2C3393D0" Association="Self.FK__orderDeta__produ__2C3393D0">
+      <End Role="products" EntitySet="products" />
+      <End Role="orderDetails" EntitySet="orderDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
